@@ -1,5 +1,5 @@
 <div id="navBar">
-    <a class="navbarItem" href="/favorites">Saved</a>
+    <a class="navbarItem" href="/saved">Saved</a>
     <a class="navbarItem" href="/">Home</a>
     <button class="navbarItem navButton" id="scrapeButton">Scrape New Articles</button>
     <button class="navbarItem navButton" id="clear">Clear all articles</button>
@@ -13,15 +13,13 @@
     {{#each article}}
     <div class="articleDiv">
         <div class="headline">
-            <h2>{{this.title}}</h2>
-            <button class="Save" data-id={{this._id}}>Save</button>
+            <h2>{{title}}</h2>
+            <button class="Save" >Save</button>
         </div>
         <div class="link">
-            <h3><a href="http://www.nytimes.com/{{this.link}}">{{this.link}}</a></h2>
+            <h3><a href="http://www.nytimes.com/{{link}}">{{link}}</a></h2>
         </div>
-        <div class="summary">
-            <p>{{this.summary}}</p>
-        </div>
+        
     </div>
     {{/each}}
 
