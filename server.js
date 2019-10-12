@@ -3,13 +3,14 @@ const path = require("path");
 const mongoose = require("mongoose");
 const exphbs = require("express-handlebars");
 
-// const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
 
-// Our scraping tools
-// Axios is a promised-based http library, similar to jQuery's Ajax method
-// It works on the client and on the server
-const axios = require("axios");
-const cheerio = require("cheerio");
+// Set mongoose to leverage built in JavaScript ES6 Promises
+mongoose.Promise = Promise;
+
+// Set the port of our application
+// process.env.PORT lets the port be set by Heroku
+const PORT = process.env.PORT || 3010;
 
 // Require all models
 // const db = require("./models");
@@ -18,33 +19,25 @@ const cheerio = require("cheerio");
 // Initialize Express
 const app = express();
 
-// Set the port of our application
-// process.env.PORT lets the port be set by Heroku
-const PORT = process.env.PORT || 3010;
+
 
 // Parse request body as JSON
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-const routes = require("./routes/routes");
-
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
-app.set("view engine", "handlebars");
-
-app.use(routes)
-// Configure middleware
-
-// Parse request body as JSON
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+require("./routes/routes")(app);
 
 // Make public a static folder
 app.use(express.static("public"));
 app.use(express.static(path.join(__dirname, "/public")));
 
+//Handlebars
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
+
 // Connect to the Mongo DB
-// mongoose.connect(MONGODB_URI);
-mongoose.connect("mongodb://localhost/27017", { useNewUrlParser: true });
+mongoose.connect(MONGODB_URI);
+//mongoose.connect("mongodb://localhost/27017", { useNewUrlParser: true });
 
 const db = mongoose.connection;
 
