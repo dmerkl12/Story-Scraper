@@ -96,76 +96,77 @@ module.exports = function (app) {
       });
   });
 
-  // Route for saving/updating an Article's associated Note
-  app.post("/articles/save/:id", function (req, res) {
-    // Use the article id to find and update its saved boolean
-    Article.findOneAndUpdate({ _id: req.params.id }, { saved: true })
+  // // Route for saving/updating an Article's associated Note
+  // app.post("/articles/save/:id", function (req, res) {
+  //   // Use the article id to find and update its saved boolean
+  //   Article.findOneAndUpdate({ _id: req.params.id }, { saved: true })
 
-      .exec(function (err, doc) {
+  //     .exec(function (err, doc) {
 
-        if (err) {
-          console.log(err);
-        } else {
+  //       if (err) {
+  //         console.log(err);
+  //       } else {
 
-          res.send(doc);
-        }
-      });
-  });
+  //         res.send(doc);
+  //       }
+  //     });
+  // });
 
-  app.post("/articles/delete/:id", function (req, res) {
-    Article.findOneAndUpdate(
-      { _id: req.params.id },
-      { $set: { saved: false, notes: [] } }
-    )
-      .exec(function (err, doc) {
+//   app.post("/articles/delete/:id", function (req, res) {
+//     Article.findOneAndUpdate(
+//       { _id: req.params.id },
+//       { $set: { saved: false, notes: [] } }
+//     )
+//       .exec(function (err, doc) {
 
-        if (err) {
-          console.log(err);
-        } else {
+//         if (err) {
+//           console.log(err);
+//         } else {
 
-          res.send(doc);
-        }
+//           res.send(doc);
+//         }
 
-      });
-  });
+//       });
+//   });
 
-//"post" a note
-  app.post("/notes/save/:id", function (req, res) {
-    let newNote = new Note({
-      body: req.body.text,
-      article: req.params.id
-    });
-    newNote.save(function (error, note) {
-      if (error) {
-        console.log(error);
-      }
-      else {
-        // Use the article id to find and update it's notes
-        Article.findOneAndUpdate(
-          { _id: req.params.id },
-          { $push: { notes: note } }
-        )
-          .exec(function (err) {
-            if (err) {
-              console.log(err);
-              res.send(err);
-            } else {
-              // Or send the note to the browser
-              res.send(note);
-            }
-          });
-        }
-      });
-  });
+// //"post" a note
+//   app.post("/notes/save/:id", function (req, res) {
+//     let newNote = new Note({
+//       body: req.body.text,
+//       article: req.params.id
+//     });
+//     newNote.save(function (error, note) {
+//       if (error) {
+//         console.log(error);
+//       }
+//       else {
+//         // Use the article id to find and update it's notes
+//         Article.findOneAndUpdate(
+//           { _id: req.params.id },
+//           { $push: { notes: note } }
+//         )
+//           .exec(function (err) {
+//             if (err) {
+//               console.log(err);
+//               res.send(err);
+//             } else {
+//               // Or send the note to the browser
+//               res.send(note);
+//             }
+//           });
+//         }
+//       });
+//   });
 
-    app.delete("/articles/clear", function(req, res) {
-      Article.remove({})
-        .then(function() {
-          return Note.remove({});
-        })
-        .then(function() {
-          res.json({ ok: true });
-        });
-    });
+//     app.delete("/articles/clear", function(req, res) {
+//       Article.remove({})
+//         .then(function() {
+//           return Note.remove({});
+//         })
+//         .then(function() {
+//           res.json({ ok: true });
+//         });
+//     });
   
+
 }

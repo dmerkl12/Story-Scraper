@@ -5,7 +5,6 @@ const exphbs = require("express-handlebars");
 
 // const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
 
-
 // Our scraping tools
 // Axios is a promised-based http library, similar to jQuery's Ajax method
 // It works on the client and on the server
@@ -13,7 +12,7 @@ const axios = require("axios");
 const cheerio = require("cheerio");
 
 // Require all models
-const db = require("./models");
+// const db = require("./models");
 
 
 // Initialize Express
@@ -47,19 +46,20 @@ app.use(express.static(path.join(__dirname, "/public")));
 // mongoose.connect(MONGODB_URI);
 mongoose.connect("mongodb://localhost/27017", { useNewUrlParser: true });
 
-const mdb = mongoose.connection;
+const db = mongoose.connection;
 
 //Show any mongoose errors
-mdb.on("error", function(error) {
+db.on("error", function(error) {
   console.log("Mongoose Error: ", error);
 });
 
 // Once logged in to the db through mongoose, log a success message
-mdb.once("open", function() {
+db.once("open", function() {
   console.log("Mongoose connection successful.");
 });
 
 // Start the server
 app.listen(PORT, function () {
-  console.log("App running on port " + PORT + "!");
+  // Log (server-side) when our server has started
+  console.log("Server listening on: http://localhost:" + PORT);
 });

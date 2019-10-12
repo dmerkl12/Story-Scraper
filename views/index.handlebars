@@ -1,0 +1,30 @@
+<div id="navBar">
+    <a class="navbarItem" href="/favorites">Saved</a>
+    <a class="navbarItem" href="/">Home</a>
+    <button class="navbarItem navButton" id="scrapeButton">Scrape New Articles</button>
+    <button class="navbarItem navButton" id="clear">Clear all articles</button>
+</div>
+
+<div>
+    <h1 id="indexHeader">NYTIMES Scraper</h1>
+</div>
+
+<div class="articleList">
+    {{#each article}}
+    <div class="articleDiv">
+        <div class="headline">
+            <h2>{{this.title}}</h2>
+            <button class="Save" data-id={{this._id}}>Save</button>
+        </div>
+        <div class="link">
+            <h3><a href="http://www.nytimes.com/{{this.link}}">{{this.link}}</a></h2>
+        </div>
+        <div class="summary">
+            <p>{{this.summary}}</p>
+        </div>
+    </div>
+    {{/each}}
+
+</div>
+
+<script src="app.js"></script>
