@@ -1,12 +1,12 @@
 <div id="navBar">
-    <a class="navbarItem" href="/saved">Saved</a>
     <a class="navbarItem" href="/">Home</a>
+    <a class="navbarItem" href="/saved">Saved</a>
     <button class="navbarItem navButton" id="scrapeButton">Scrape New Articles</button>
     <button class="navbarItem navButton" id="clear">Clear all articles</button>
 </div>
 
 <div>
-    <h1 id="indexHeader">NYTIMES Scraper</h1>
+    <h1 id="index-Header">NYTIMES Scraper</h1>
 </div>
 
 <div class="articleList">
@@ -14,15 +14,13 @@
     <div class="articleDiv">
         <div class="headline">
             <h2>{{title}}</h2>
-            <button class="Save" data-id="{{id}}">Save</button>
+            <button id="SaveButton" data-id="{{id}}">Save</button>
         </div>
         <div class="link">
-            <h3><a href="http://www.nytimes.com/{{link}}">{{link}}</a></h2>
+            <h3><a href="https://www.nytimes.com/{{link}}">{{link}}</a></h2>
         </div>
-        
+
     </div>
     {{/each}}
 
 </div>
-
-<script src="app.js"></script>
