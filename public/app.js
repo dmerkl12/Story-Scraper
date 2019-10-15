@@ -22,31 +22,31 @@ document.getElementById("clear").addEventListener("click", () => {
 
 
 
-const saveButtons = document.getElementById("SaveButton");
-for (let i = 0; i < saveButtons.length; i++) {
+// const saveButtons = document.getElementById("SaveButton");
+// for (let i = 0; i < saveButtons.length; i++) {
 
-    saveButtons[i].addEventListener("click", function () {
-        const articleId = this.dataset.id;
-        console.log(this, articleId);
+//     saveButtons[i].addEventListener("click", function () {
+//         const articleId = this.dataset.id;
+//         console.log(this, articleId);
 
-        axios.put("/articles/saved/" + articleId).then((response) => {
-            window.location = "/saved";
-        }).catch((err) => {
-            console.log(err);
-        })
-    })
-}
+//         axios.put("/articles/saved/" + articleId).then((response) => {
+//             window.location = "/saved";
+//         }).catch((err) => {
+//             console.log(err);
+//         })
+//     })
+// }
 
-const deleteArticleButton = document.getElementById("deleteArticleButton");
-for (let i = 0; i < deleteArticleButton.length; i++) {
+// const deleteArticleButton = document.getElementById("deleteArticleButton");
+// for (let i = 0; i < deleteArticleButton.length; i++) {
 
-    deleteArticleButton[i].addEventListener("click", function () {
-        const articleId = this.dataset.id;
+//     deleteArticleButton[i].addEventListener("click", function () {
+//         const articleId = this.dataset.id;
 
-        axios.put("/articles/delete/" + articleId).then((response) => {
+//         axios.put("/articles/delete/" + articleId).then((response) => {
 
-        }).catch((err) => {
-            console.log(err)
-        })
-    })
-}
+//         }).catch((err) => {
+//             console.log(err)
+//         })
+//     })
+// }

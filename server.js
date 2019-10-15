@@ -6,9 +6,11 @@ const axios = require("axios");
 const cheerio = require("cheerio");
 
 
-
-
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
+
+mongoose.connect(MONGODB_URI);
+
+
 
 const db = require("./models");
 
@@ -38,8 +40,8 @@ app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
 // Connect to the Mongo DB
-mongoose.connect(MONGODB_URI);
-//mongoose.connect("mongodb://localhost/27017", { useNewUrlParser: true });
+// mongoose.connect(MONGODB_URI);
+// mongoose.connect("mongodb://localhost/27017", { useNewUrlParser: true });
 
 const dbc = mongoose.connection;
 
@@ -142,17 +144,17 @@ app.get("/articles/:id", function (req, res) {
     });
 });
 
+//I couldn't get the articles to be saved.
 
-// grabbing 10 stories from the db
-app.get("articles/saved", function (req, res) {
+// app.get("articles/saved", function (req, res) {
 
-  db.articles.find({ "saved": true })
-    .limit(10)
-    .exec(function (err, data) {
-      res.render("saved", { article: data });
-      if (err) throw err;
-    })
-});
+//   db.articles.find({ "saved": true })
+//     .limit(10)
+//     .exec(function (err, data) {
+//       res.render("saved", { article: data });
+//       if (err) throw err;
+//     })
+// });
 
 // Route for saving/updating an Article's associated Note
 app.post("/articles/saved/:id", function (req, res) {
